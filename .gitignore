@@ -1,5 +1,6 @@
-Makefile
-srv.pid
-pelican.pid
-*.pyc
-output/*
+logs/*
+!.gitkeep
+node_modules/
+tmp
+.DS_Store
+.idea
