@@ -1,30 +1,68 @@
-'use strict';
+(function () {
+    'use strict';
 
-/* Controllers */
+    /* Controllers */
 
-var claytoControllers = angular.module('clayto.controllers', []);
+    var claytoControllers = angular.module('clayto.controllers', []);
 
-claytoControllers.controller(
-    'PhotoCtrl',
-    ['$scope', '$routeParams',
-        function() {
-            $scope.photo = "SINGLE PHOTO";
-        }
-    ]
-);
+    claytoControllers.controller(
+        'PhotoCtrl',
+        ['$scope', '$routeParams',
+            function($scope, $routeParams) {
+                $scope.photo = "SINGLE PHOTO";
+            }
+        ]
+    );
 
-claytoControllers.controller(
-    'PhotoGalleryCtrl',
-    ['$scope', '$routeParams', '$http',
-        function($scope, $routeParams, $http) {
-            $http({
-                method: 'GET',
-                url: 'http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=cbb428f4219002d668365db2ce3274b1&photoset_id=72157639704760704&format=json&nojsoncallback=1&auth_token=72157639698202766-fce1793135264904&api_sig=50925e0302aa867ae5b6c0395beea930'}).
-                success( function (data, status, headers, config) {
-                    $scope.photos = data.photoset;
-                }).
-                error( function (data, status, headers, config) {
+
+    // Photo URL building rules and size characters acquired at:
+    // http://www.flickr.com/services/api/misc.urls.html
+    function flickr_get_image_url (photo, size) {
+        return ['http://farm',
+            photo.farm,
+            '.staticflickr.com/',
+            photo.server,
+            '/',
+            photo.id,
+            '_',
+            photo.secret,
+            SIZES[size],
+            '.jpg'].join('');
+    }
+    var SIZES = {
+         75: '_s',
+        150: '_q',
+        100: '_t',
+        240: '_m',
+        320: '_n',
+        500: '',
+        640: '_z',
+        800: '_c',
+        940: '_b'
+    };
+
+
+    claytoControllers.controller(
+        'PhotoGalleryCtrl',
+        ['$scope', 'Photoset',
+            function($scope, Photoset) {
+                // Get the list of photos in clayto.com photoset
+
+                $scope.photos = [];
+
+                Photoset.get({}, function(photoset) {
+                    var photos = photoset.photoset.photo;
+                    var i = 0;
+                    // Now get the URLs to the JPG image for each photo
+                    for (i = 0; i < photos.length; i += 1) {
+                        $scope.photos.push({ 
+                            title: photos[i].title,
+                            img: flickr_get_image_url(photos[i], 940),
+                            thumb: flickr_get_image_url(photos[i], 240) 
+                        });
+                    }
                 });
-        }
-    ]
-);
+            }
+        ]
+    );
+}());

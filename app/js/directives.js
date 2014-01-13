@@ -1,11 +1,14 @@
-'use strict';
+(function () {
+    'use strict';
 
-/* Directives */
+    /* Directives */
 
 
-angular.module('clayto.directives', []).
-  directive('appVersion', ['version', function(version) {
-    return function(scope, elm, attrs) {
-      elm.text(version);
-    };
-  }]);
+    angular.module('clayto.directives', []).
+      directive('appVersion', ['version', function(version) {
+        return function(scope, elm, attrs) {
+          elm.text(version);
+        };
+      }]);
+
+}());
