@@ -2,46 +2,46 @@
 
 .photo-container {
     position: relative;
+    margin-top: 10px;
 }
 img {
-  -webkit-transition : 0.3s ease-out all;
-     -moz-transition : 0.3s ease-out all;
-       -o-transition : 0.3s ease-out all;
-          transition : 0.3s ease-out all;
-  position: absolute;
-  z-index: 1;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+
+.photo-container .photo-slide {
+  -webkit-transition: 0.3s ease-out all !important;
+  transition:0.3s ease-out all !important;
+  opacity:1;
+}
+
+.photo-container .photo-slide.ng-hide {
+    opacity:0;
+}
+
+.photo-container .photo-slide.ng-hide-add,
+.photo-container .photo-slide.ng-hide-remove {
+  /* this needs to be here to make it visible during the animation
+     since the .ng-hide class is already on the element rendering
+     it as hidden. */
+    display:block!important;
+}
+.photo-container .photo-slide.ng-hide-remove {
+}
+.photo-container .photo-slide.ng-hide-add {
 }
 
 .slide-left {
-  -webkit-transform : translateX(-50px);
-     -moz-transform : translateX(-50px);
-       -o-transform : translateX(-50px);
-          transform : translateX(-50px);
+  -webkit-transform : translate(-20%, 0) scale(1);
+     -moz-transform : translate(-20%, 0) scale(1);
+       -o-transform : translate(-20%, 0) scale(1);
+          transform : translate(-20%, 0) scale(1);
 }
 .slide-right {
-  -webkit-transform : translateX(50px);
-     -moz-transform : translateX(50px);
-       -o-transform : translateX(50px);
-          transform : translateX(50px);
+  -webkit-transform : translate(20%, 0) scale(1);
+     -moz-transform : translate(20%, 0) scale(1);
+       -o-transform : translate(20%, 0) scale(1);
+          transform : translate(20%, 0) scale(1);
 }
 
-.ng-hide {
-    z-index: -1;
-    display: block !important;
-    -webkit-transform : translateX(-1000px);
-       -moz-transform : translateX(-1000px);
-         -o-transform : translateX(-1000px);
-            transform : translateX(-1000px);
-    }
-.ng-animate.ng-hide-add {
-    }
-.ng-animate.ng-hide-add-active {
-    }
-.ng-animate.ng-hide-remove {
-    }
-.ng-animate.ng-hide-remove-active {
-    -webkit-transform : translateX(50px);
-       -moz-transform : translateX(50px);
-         -o-transform : translateX(50px);
-            transform : translateX(50px);
-    }

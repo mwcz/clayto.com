@@ -1,24 +1,36 @@
 <div class="container">
 
+    <div data-ng-show="flickr_fail">
+        I'm sorry, but my photos are hosted by Flickr and Flickr appears to be
+        down.  I'm redirecting you to <a href="http://www.flickr.com/mwcloud"
+        title="my Flickr page">my Flickr page</a>, but odds are that it's down
+        too.
+        </div>
+
     <div
-        data-ng-repeat  = "photo in photos"
-        class="photo-container">
+        class        = "photo-gallery"
+        data-ng-show = "!flickr_fail">
 
-        <img
-            class           = "img-responsive"
-            data-ng-src     = "{{ photo.img }}"
-            data-ng-show    = "current_photo === $index"
-            alt             = "{{ photo.title }}" />
+        <div class="text-center controls hidden-xs">
+            <span
+                class         = "glyphicon glyphicon-arrow-left btn btn-lg"
+                data-ng-click = "current_photo = current_photo - 1"></span>
+            <span
+                class         = "glyphicon glyphicon-arrow-right btn btn-lg"
+                data-ng-click = "current_photo = current_photo + 1"></span>
+            </div>
+
+        <div
+            data-ng-repeat = "photo in photos"
+            class          = "photo-container">
+
+            <img
+                class           = "img-responsive photo-slide"
+                data-ng-src     = "{{ photo.img }}"
+                data-ng-show    = "current_photo === $index"
+                alt             = "{{ photo.title }}" />
+
+            </div>
 
         </div>
-
-    <div class="text-center">
-        <span
-            class         = "glyphicon glyphicon-arrow-left btn btn-lg"
-            data-ng-click = "current_photo = current_photo - 1"></span>
-        <span
-            class         = "glyphicon glyphicon-arrow-right btn btn-lg"
-            data-ng-click = "current_photo = current_photo + 1"></span>
-        </div>
-
 </div>
