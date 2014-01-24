@@ -26,8 +26,8 @@
 
             <img
                 class           = "img-responsive photo-slide"
-                data-ng-src     = "{{ photo.img }}"
                 data-ng-show    = "current_photo === $index"
+                data-ng-src     = "{{ photos[$index].img }}"
                 alt             = "{{ photo.title }}" />
 
             </div>

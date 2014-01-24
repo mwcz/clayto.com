@@ -35,64 +35,86 @@
         940: '_b'
     };
 
+    function pre_cache(image) {
+        image.img = image.lazy_img;
+    }
+
+    function pre_cache_adjacent(scope, count) {
+        var i, current;
+        for (i = -count; i <= count; i += 1) {
+            current = scope.current_photo + i;
+            if (current >= 0 && current < scope.photos.length) {
+                pre_cache(scope.photos[scope.current_photo + i]);
+            }
+        }
+    }
+
     claytoControllers.controller(
         'PhotoGalleryCtrl',
-        ['$scope', '$timeout', '$interval', 'Photoset',
-            function ($scope, $timeout, $interval, Photoset) {
-                // Get the list of photos in clayto.com photoset
+        function ($scope, $timeout, $interval, Photoset) {
+            // Get the list of photos in clayto.com photoset
 
-                $scope.photos = [];
-                $scope.current_photo = 0;
+            $scope.photos = [];
+            $scope.current_photo = 0;
 
-                Photoset.get({}, function(photoset) {
+            Photoset.get({}, function(photoset) {
 
-                    var photos, i, redirect_delay, redirect_tick;
+                var photos, i, redirect_delay, redirect_tick;
 
-                    if (photoset.stat === "fail") {
-                        redirect_delay = 5000; // ms
-                        redirect_tick = 1000; // ms
-                        i = 0;
-                        $scope.flickr_fail = true;
+                // If flickr's API returns an error...
+                if (photoset.stat === "fail") {
 
-                        NProgress.configure({ showSpinner: false });
-                        NProgress.start();
-                        $interval( function() {
-                            i += 1;
-                            NProgress.set(i / (redirect_delay / redirect_tick) );
-                        }, redirect_tick );
-                        $timeout( function() {
-                            window.location = "http://www.flickr.com/mwcloud";
-                        }, redirect_delay );
-                    } else {
-                        photos = photoset.photoset.photo;
-                        i = 0;
+                    redirect_delay = 5000; // ms
+                    redirect_tick = 1000; // ms
 
-                        // Now get the URLs to the JPG image for each photo
-                        for (i = 0; i < photos.length; i += 1) {
-                            $scope.photos.push({
-                                title: photos[i].title,
-                                img: flickr_get_image_url(photos[i], 940),
-                            });
-                        }
+                    i = 0;
+                    $scope.flickr_fail = true; // error message ngShow's this
 
-                        // When the current photo changes, pre-cache the previous
-                        // and next photos, and $scope.current_photo from going
-                        // below zero or over the maximum number of photos.
-                        $scope.$watch('current_photo', function(new_index, old_index, scope) {
-                            var over  = scope.current_photo > scope.photos.length;
-                            var under = scope.current_photo < 0;
-                            // TODO re-add precaching
-                            if (under) {
-                                scope.current_photo = 0;
-                            } else if (over) {
-                                scope.current_photo = scope.photos.length;
-                            }
+                    // Show a progress bar, redirect to flickr.com when done
+                    NProgress.configure({ showSpinner: false });
+                    NProgress.start();
+                    $interval( function() {
+                        i += 1;
+                        NProgress.set(i / (redirect_delay / redirect_tick) );
+                    }, redirect_tick );
+                    $timeout( function() {
+                        window.location = "http://www.flickr.com/mwcloud";
+                    }, redirect_delay );
+                } else {
+                    photos = photoset.photoset.photo;
+                    i = 0;
+
+                    // Now get the URLs to the JPG image for each photo
+                    for (i = 0; i < photos.length; i += 1) {
+                        $scope.photos.push({
+                            title: photos[i].title,
+                            lazy_img: flickr_get_image_url(photos[i], 940),
+                            img: ""
                         });
                     }
 
-                });
-            }
-        ]
+                    // When the current photo changes, pre-cache the previous
+                    // and next photos, and $scope.current_photo from going
+                    // below zero or over the maximum number of photos.
+                    $scope.$watch('current_photo', function(new_index, old_index, scope) {
+                        var over  = scope.current_photo >= scope.photos.length;
+                        var under = scope.current_photo < 0;
+
+                        var cache_adjacent = 2; 
+
+                        // pre-cache this number of images to the left and
+                        // right of the current photo
+                        pre_cache_adjacent(scope, cache_adjacent);
+
+                        if (under) {
+                            scope.current_photo = 0;
+                        } else if (over) {
+                            scope.current_photo = scope.photos.length - 1;
+                        }
+                    });
+                }
+            });
+        }
     );
 
 }());
