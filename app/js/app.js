@@ -13,8 +13,7 @@
         'clayto.services',
         'clayto.controllers'
     ]).
-    config(
-        ['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
+    config(function($routeProvider, $httpProvider) {
 
         // Configure routes
         $routeProvider.when('/', {templateUrl: 'partials/photo.html', controller: 'PhotoGalleryCtrl'});
@@ -24,6 +23,6 @@
         // Cache every http request
         $httpProvider.defaults.cache = true;
 
-    }]);
+    });
 
 }());

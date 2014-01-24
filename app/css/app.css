@@ -1,5 +1,12 @@
 /* app css stylesheet */
 
+/* TODO vertical centering! */
+/*.element {*/
+  /*position: relative;*/
+  /*top: 50%;*/
+  /*transform: translateY(-50%);*/
+/*}*/
+
 .photo-container {
     position: relative;
     margin-top: 10px;
