@@ -9,12 +9,9 @@
 
     claytoServices.factory(
         'Photoset',
-        [
-            '$resource',
-            function ($resource) {
-                return $resource(flickr_clayto_photoset, {}, {});
-            }
-        ]
+        function ($resource) {
+            return $resource(flickr_clayto_photoset, {}, {});
+        }
     );
 
 }());
