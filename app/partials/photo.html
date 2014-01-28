@@ -28,12 +28,13 @@
 
         <div
             data-ng-repeat = "photo in photos"
+            data-palette   = "{{ photo.palette }}"
             class          = "photo-container">
 
             <img
                 class           = "img-responsive photo-slide"
                 data-ng-show    = "current_photo === $index"
-                data-ng-src     = "{{ photos[$index].img }}"
+                data-ng-src     = "{{ photo.img }}"
                 alt             = "{{ photo.title }}" />
 
             </div>
