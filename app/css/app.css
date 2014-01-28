@@ -2,7 +2,7 @@
 
 /* TODO vertical centering! */
 
-html, body { height: 100%; }
+html, body { height: 100%; overflow: hidden; }
 
 .photo-container {
     /*position: relative;*/
