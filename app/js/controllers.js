@@ -90,7 +90,10 @@
                         $scope.photos.push({
                             title: photos[i].title,
                             lazy_img: flickr_get_image_url(photos[i], 940),
-                            img: ""
+                            img: "",
+                            palette: [ [ 39, 36, 37 ],
+                                [ 255, 255, 255 ],
+                                [ 254, 254, 254 ] ]
                         });
                     }
 
