@@ -11,16 +11,7 @@
     // Photo URL building rules and size characters acquired at:
     // http://www.flickr.com/services/api/misc.urls.html
     function flickr_get_image_url (photo, size) {
-        return ['http://farm',
-            photo.farm,
-            '.staticflickr.com/',
-            photo.server,
-            '/',
-            photo.id,
-            '_',
-            photo.secret,
-            flickr_get_image_url.SIZES[size],
-            '.jpg'].join('');
+        return ("http://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + flickr_get_image_url.SIZES[size] + ".jpg");
     }
 
     flickr_get_image_url.SIZES = {
@@ -52,11 +43,19 @@
 
     claytoControllers.controller(
         'PhotoGalleryCtrl',
-        function ($scope, $timeout, $interval, Photoset) {
+        function ($scope, $timeout, $interval, Photoset, Palette) {
             // Get the list of photos in clayto.com photoset
 
             $scope.photos = [];
             $scope.current_photo = 0;
+
+            $scope.prev = function () {
+                current_photo -= 1;
+            };
+
+            $scope.next = function () {
+                current_photo += 1;
+            };
 
             Photoset.get({}, function(photoset) {
 
@@ -101,10 +100,25 @@
                     // and next photos, and $scope.current_photo from going
                     // below zero or over the maximum number of photos.
                     $scope.$watch('current_photo', function(new_index, old_index, scope) {
+
                         var over  = scope.current_photo >= scope.photos.length;
                         var under = scope.current_photo < 0;
 
-                        var cache_adjacent = 2; 
+                        var cache_adjacent = 2;  // how many adjacent images to pre-cache
+
+                        Palette.get({}, function(palettes) {
+                            var bg, border;
+                            
+                            try {
+                                bg = palettes[photos[scope.current_photo].title].background;
+                                border = palettes[photos[scope.current_photo].title].border;
+                            } catch (e) {
+                                bg = '#000';
+                                border = '#999';
+                            }
+                            
+                            document.body.style.backgroundColor = bg;
+                        });
 
                         // pre-cache this number of images to the left and
                         // right of the current photo
