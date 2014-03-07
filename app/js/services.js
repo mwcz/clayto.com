@@ -14,4 +14,23 @@
         }
     );
 
+    claytoServices.factory(
+        'Palette',
+        function ($resource, $http) {
+            var palette_request = $http.get('palettes.json');
+            var return_data;
+
+            palette_request.success(function (data, status, headers, config) {
+                return_data = data;
+            });
+
+            palette_request.error(function (data, status, headers, config) {
+                return_data = data;
+            });
+
+            //return return_data;
+            return $resource('palettes.json');
+        }
+    );
+
 }());
