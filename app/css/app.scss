@@ -43,6 +43,13 @@ nav {
     border-color: $DEFAULT_BORDER_COLOR;
     border-width: 0 0 1px 0;
     border-style: solid;
+
+    button {
+        padding: 0;
+        margin: 0;
+        border: 0;
+        background: none;
+    }
 }
 
 footer {
