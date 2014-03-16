@@ -2,6 +2,7 @@
 
 @import 'normalize.css';
 @import 'bourbon/bourbon';
+@import 'fonts';
 
 $PHOTO_FADE_IN_DURATION: 0.6s;
 $PHOTO_FADE_OUT_DURATION: 0.3s;
@@ -12,9 +13,17 @@ $BG_FADE_DURATION: 0.3s;
 $DEFAULT_BG_COLOR: #000;
 $DEFAULT_BORDER_COLOR: #919191;
 
+$NAVBAR_HEIGHT: 2em;
+
+@mixin calc($property, $expression) { 
+  #{$property}: -webkit-calc(#{$expression}); 
+  #{$property}: calc(#{$expression}); 
+}
+
 html, body { height: 100%; overflow: hidden; }
 
 body {
+    font-family: "BitstreamVera";
     background-color: #1f1f1f;
     color: #9f9f9f;
     @include transition( background-color $BG_FADE_DURATION ease-out );
@@ -23,10 +32,13 @@ body {
 
 nav {
     position: absolute;
+    z-index: 10000;
     top: 0;
     left: 0;
     width: 100%;
-    height: 3em;
+    line-height: 200%;
+    padding-left: 0.5em;
+    height: $NAVBAR_HEIGHT;
     background-color: $DEFAULT_BG_COLOR;
     border-color: $DEFAULT_BORDER_COLOR;
     border-width: 0 0 1px 0;
@@ -42,13 +54,21 @@ footer {
 
 .photo-gallery {
     .photo-container {
-        max-height: calc(100% - 6em - 1px);
+        @include calc(max-height, "100% - #{$NAVBAR_HEIGHT * 2} - 1px");
 
         img {
+            box-shadow: 0px -5px 20px rgba(0, 0, 0, 0.7), 0px 0px 40px rgba(0, 0, 0, 0.4);
             position: absolute;
-            max-height: inherit; /* from .photo-container */
+            max-height: inherit; // from .photo-container
 
-            /* center vertically and horizontally */
+            max-width: 96%;      // leave some space on left and right of the
+                                 // photo
+
+            background-color: $DEFAULT_BG_COLOR;
+            outline: 1px solid $DEFAULT_BORDER_COLOR;
+            border: 2px solid black;
+
+            // center vertically and horizontally
             top: 50%;
             left: 50%;
             @include transform( translate(-50%, -50%) );

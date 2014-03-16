@@ -1,12 +1,16 @@
 /* app css stylesheet */
 @import url(normalize.css);
-/* line 15 */
+@font-face {
+  font-family: "BitstreamVera";
+  src: url("../fonts/ttf-bitstream-vera-1.10/Vera.ttf"); }
+/* line 23 */
 html, body {
   height: 100%;
   overflow: hidden; }
 
-/* line 17 */
+/* line 25 */
 body {
+  font-family: "BitstreamVera";
   background-color: #1f1f1f;
   color: #9f9f9f;
   -webkit-transition: background-color 0.3s ease-out;
@@ -17,33 +21,40 @@ body {
   -ms-user-select: none;
   user-select: none; }
 
-/* line 24 */
+/* line 33 */
 nav, footer {
   position: absolute;
+  z-index: 10000;
   top: 0;
   left: 0;
   width: 100%;
-  height: 3em;
+  line-height: 200%;
+  padding-left: 0.5em;
+  height: 2em;
   background-color: black;
   border-color: #919191;
   border-width: 0 0 1px 0;
   border-style: solid; }
 
-/* line 36 */
+/* line 48 */
 footer {
   top: auto;
   bottom: 0;
   border-width: 1px 0 0 0; }
 
-/* line 44 */
+/* line 56 */
 .photo-gallery .photo-container {
-  max-height: calc(100% - 6em - 1px); }
-  /* line 47 */
+  max-height: -webkit-calc(100% - 4em - 1px);
+  max-height: calc(100% - 4em - 1px); }
+  /* line 59 */
   .photo-gallery .photo-container img {
+    box-shadow: 0px -5px 20px rgba(0, 0, 0, 0.7), 0px 0px 40px rgba(0, 0, 0, 0.4);
     position: absolute;
     max-height: inherit;
-    /* from .photo-container */
-    /* center vertically and horizontally */
+    max-width: 96%;
+    background-color: black;
+    outline: 1px solid #919191;
+    border: 2px solid black;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
@@ -51,29 +62,29 @@ footer {
     -ms-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%); }
-  /* line 57 */
+  /* line 77 */
   .photo-gallery .photo-container .photo-slide {
     opacity: 1;
     -webkit-transition: 0.3s ease-out all, 0.6s ease-out opacity !important;
     -moz-transition: 0.3s ease-out all, 0.6s ease-out opacity !important;
     transition: 0.3s ease-out all, 0.6s ease-out opacity !important; }
-    /* line 64 */
+    /* line 84 */
     .photo-gallery .photo-container .photo-slide.ng-hide {
       opacity: 0;
       -webkit-transition: 0.3s ease-out all, 0.3s ease-out opacity !important;
       -moz-transition: 0.3s ease-out all, 0.3s ease-out opacity !important;
       transition: 0.3s ease-out all, 0.3s ease-out opacity !important; }
-    /* line 72 */
+    /* line 92 */
     .photo-gallery .photo-container .photo-slide.ng-hide-add, .photo-gallery .photo-container .photo-slide.ng-hide-remove {
       display: block !important; }
-  /* line 83 */
+  /* line 103 */
   .photo-gallery .photo-container .slide-left {
     -webkit-transform: translate(-70%, -50%);
     -moz-transform: translate(-70%, -50%);
     -ms-transform: translate(-70%, -50%);
     -o-transform: translate(-70%, -50%);
     transform: translate(-70%, -50%); }
-  /* line 86 */
+  /* line 106 */
   .photo-gallery .photo-container .slide-right {
     -webkit-transform: translate(-30%, -50%);
     -moz-transform: translate(-30%, -50%);
@@ -82,11 +93,11 @@ footer {
     transform: translate(-30%, -50%); }
 
 @media (max-width: 767px) {
-  /* line 96 */
+  /* line 116 */
   .photo-gallery .photo-container {
     max-height: 94%;
     max-width: 94%; }
 
-  /* line 101 */
+  /* line 121 */
   .hidden-xs {
     display: none !important; } }

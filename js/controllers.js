@@ -90,9 +90,11 @@
                             title: photos[i].title,
                             lazy_img: flickr_get_image_url(photos[i], 940),
                             img: "",
-                            palette: [ [ 39, 36, 37 ],
+                            palette: [
+                                [ 39, 36, 37 ],
                                 [ 255, 255, 255 ],
-                                [ 254, 254, 254 ] ]
+                                [ 254, 254, 254 ]
+                            ]
                         });
                     }
 
@@ -104,7 +106,17 @@
                         var over  = scope.current_photo >= scope.photos.length;
                         var under = scope.current_photo < 0;
 
+                        if (under) {
+                            scope.current_photo = 0;
+                        } else if (over) {
+                            scope.current_photo = scope.photos.length - 1;
+                        }
+
                         var cache_adjacent = 2;  // how many adjacent images to pre-cache
+
+                        // pre-cache this number of images to the left and
+                        // right of the current photo
+                        pre_cache_adjacent(scope, cache_adjacent);
 
                         Palette.get({}, function(palettes) {
                             var bg, border;
@@ -115,22 +127,15 @@
                                 border = palettes[photos[scope.current_photo].title].border;
                             } catch (e) {
                                 // otherwise, defaults
-                                bg     = '#000';
+                                bg     = '#1f1f1f';
                                 border = '#999';
                             }
 
                             document.body.style.backgroundColor = bg;
+                            document.querySelector('nav').style.borderColor = border;
+                            document.querySelector('footer').style.borderColor = border;
+                            document.querySelectorAll('.photo-container img')[scope.current_photo].style.outlineColor = border;
                         });
-
-                        // pre-cache this number of images to the left and
-                        // right of the current photo
-                        pre_cache_adjacent(scope, cache_adjacent);
-
-                        if (under) {
-                            scope.current_photo = 0;
-                        } else if (over) {
-                            scope.current_photo = scope.photos.length - 1;
-                        }
                     });
                 }
             });
