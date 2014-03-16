@@ -77,6 +77,11 @@ module.exports = function(grunt) {
         my_target: {
             files: {
                 'build/app/js/app.min.js': [
+                    'app/lib/angular/angular.js',
+                    'app/lib/angular/angular-resource.js',
+                    'app/lib/angular/angular-route.js',
+                    'app/lib/angular/angular-touch.js',
+                    'app/lib/angular/angular-animate.js',
                     'app/js/app.js',
                     'app/js/services.js',
                     'app/js/controllers.js',
