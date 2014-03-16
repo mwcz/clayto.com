@@ -110,10 +110,12 @@
                             var bg, border;
                             
                             try {
+                                // try to pull out backgroundand border
                                 bg = palettes[photos[scope.current_photo].title].background;
                                 border = palettes[photos[scope.current_photo].title].border;
                             } catch (e) {
-                                bg = '#000';
+                                // otherwise, defaults
+                                bg     = '#000';
                                 border = '#999';
                             }
                             
