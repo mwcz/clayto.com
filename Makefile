@@ -28,7 +28,7 @@ publish: clean
 
 github: publish
 	echo "clayto.com" > $(OUTPUTDIR)/CNAME
-	ghp-import $(OUTPUTDIR)
+	ghp-import $(OUTPUTDIR) -m "latest changes from master" -p
 	git push origin gh-pages
 
 .PHONY: clean github
