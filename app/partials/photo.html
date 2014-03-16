@@ -17,14 +17,12 @@
         class        = "photo-gallery"
         data-ng-show = "!flickr_fail">
 
-        <div class="text-center controls hidden-xs">
+        <nav class="hidden-xs">
             <span
-                class         = "glyphicon glyphicon-arrow-left btn btn-lg"
-                data-ng-click = "current_photo = current_photo - 1"></span>
+                data-ng-click = "current_photo = current_photo - 1">Prev</span>
             <span
-                class         = "glyphicon glyphicon-arrow-right btn btn-lg"
-                data-ng-click = "current_photo = current_photo + 1"></span>
-            </div>
+                data-ng-click = "current_photo = current_photo + 1">Next</span>
+            </nav>
 
         <div
             data-ng-repeat = "photo in photos"
@@ -38,6 +36,13 @@
                 alt             = "{{ photo.title }}" />
 
             </div>
+
+        <footer class="hidden-xs">
+            <span
+                data-ng-click = "current_photo = current_photo - 1">Hi</span>
+            <span
+                data-ng-click = "current_photo = current_photo + 1">Viewer</span>
+            </footer>
 
         </div>
 </div>
