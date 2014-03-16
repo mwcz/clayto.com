@@ -11,6 +11,7 @@
 BASEDIR=$(CURDIR)
 INPUTDIR=$(BASEDIR)/app
 OUTPUTDIR=$(BASEDIR)/build
+GHPAGEDIR=$(OUTPUTDIR)/build/app
 
 help:
 	@echo 'Makefile for clayto.com web site                                       '
@@ -28,7 +29,7 @@ publish: clean
 
 github: publish
 	echo "clayto.com" > $(OUTPUTDIR)/CNAME
-	ghp-import $(OUTPUTDIR) -m "latest changes from master" -p
+	ghp-import $(GHPAGEDIR) -m "latest changes from master" -p
 	git push origin gh-pages
 
 .PHONY: clean github
