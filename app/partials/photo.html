@@ -17,7 +17,7 @@
         class        = "photo-gallery"
         data-ng-show = "!flickr_fail">
 
-        <nav class="hidden-xs">
+        <nav class="hidden-xs colored-border">
             <span
                 data-ng-click = "prev()">Prev</span>
             <span
@@ -30,15 +30,15 @@
             class          = "photo-container">
 
             <img
-                class           = "img-responsive photo-slide"
+                class           = "img-responsive photo-slide colored-border"
                 data-ng-show    = "current_photo === $index"
                 data-ng-src     = "{{ photo.img }}"
                 alt             = "{{ photo.title }}" />
 
             </div>
 
-        <footer class="hidden-xs">
-            Hi Viewer
+        <footer class="hidden-xs colored-border">
+            clayto.com | hello viewer
             </footer>
 
         </div>
