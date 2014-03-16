@@ -50,11 +50,11 @@
             $scope.current_photo = 0;
 
             $scope.prev = function () {
-                current_photo -= 1;
+                $scope.current_photo -= 1;
             };
 
             $scope.next = function () {
-                current_photo += 1;
+                $scope.current_photo += 1;
             };
 
             Photoset.get({}, function(photoset) {
@@ -108,7 +108,7 @@
 
                         Palette.get({}, function(palettes) {
                             var bg, border;
-                            
+
                             try {
                                 // try to pull out backgroundand border
                                 bg = palettes[photos[scope.current_photo].title].background;
@@ -118,7 +118,7 @@
                                 bg     = '#000';
                                 border = '#999';
                             }
-                            
+
                             document.body.style.backgroundColor = bg;
                         });
 
