@@ -28,7 +28,7 @@ publish: clean
 	grunt
 
 github: publish
-	echo "clayto.com" > $(OUTPUTDIR)/CNAME
+	echo "clayto.com" > $(GHPAGEDIR)/CNAME
 	ghp-import $(GHPAGEDIR) -m "latest changes from master" -p
 	git push origin gh-pages
 
