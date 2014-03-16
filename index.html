@@ -10,25 +10,27 @@
 <body
     class="ng-cloak"
     data-ng-view
-    data-key-left       = "current_photo = current_photo - 1"
-    data-key-right      = "current_photo = current_photo + 1"
-    data-ng-swipe-right = "current_photo = current_photo - 1"
-    data-ng-swipe-left  = "current_photo = current_photo + 1">
+    data-key-up         = "prev()"
+    data-key-left       = "prev()"
+    data-key-down       = "next()"
+    data-key-right      = "next()"
+    data-ng-swipe-right = "prev()"
+    data-ng-swipe-left  = "next()">
 
-    <!--<script src="lib/angular/angular.js"></script>-->
-    <!--<script src="lib/angular/angular-resource.js"></script>-->
-    <!--<script src="lib/angular/angular-route.js"></script>-->
-    <!--<script src="lib/angular/angular-touch.js"></script>-->
-    <!--<script src="lib/angular/angular-animate.js"></script>-->
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular-resource.js"></script>
+    <script src="lib/angular/angular-route.js"></script>
+    <script src="lib/angular/angular-touch.js"></script>
+    <script src="lib/angular/angular-animate.js"></script>
 
     <!-- clayto.com's js -->
-    <script src="js/app.min.js"></script>
-    <!--<script src="js/app.js"></script>-->
-    <!--<script src="js/services.js"></script>-->
-    <!--<script src="js/controllers.js"></script>-->
-    <!--<script src="js/filters.js"></script>-->
-    <!--<script src="js/directives.js"></script>-->
-    <!--<script src="js/animations.js"></script>-->
+    <!--<script src="js/app.min.js"></script>-->
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/animations.js"></script>
 
     <!-- third-party js libraries -->
     <script async src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.1.2/nprogress.min.js"></script>
