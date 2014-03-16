@@ -11,7 +11,7 @@
 BASEDIR=$(CURDIR)
 INPUTDIR=$(BASEDIR)/app
 OUTPUTDIR=$(BASEDIR)/build
-GHPAGEDIR=$(OUTPUTDIR)/build/app
+GHPAGEDIR=$(OUTPUTDIR)/app
 
 help:
 	@echo 'Makefile for clayto.com web site                                       '
