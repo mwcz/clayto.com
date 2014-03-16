@@ -2,12 +2,14 @@
 
 module.exports = function(grunt) {
 
+    var tasks_in_order = ['copy', 'sass', 'uglify', 'cssmin'];
+
     /*******************
      *  WATCH OPTIONS  *
      *******************/
 
     var watch_options = {
-        tasks: ['copy', 'sass', 'uglify', 'cssmin'],
+        tasks: tasks_in_order,
         //tasks: ['copy', 'traceur'],
         files:  'app/**/*',
         grunt: {
@@ -106,14 +108,28 @@ module.exports = function(grunt) {
         }
     };
 
+    /**************************
+     *  GITHUB-PAGES OPTIONS  *
+     **************************/
+
+    var github_pages_options = {
+        target: {
+            options: {
+                commitMessage: 'latest changes from master'
+            },
+            src: 'build'
+        }
+    };
+
 
     grunt.initConfig({
         //traceur : traceur_options,
-        watch  : watch_options,
-        copy   : copy_options,
-        sass   : sass_options,
-        uglify : uglify_options,
-        cssmin : cssmin_options
+        watch       : watch_options,
+        copy        : copy_options,
+        sass        : sass_options,
+        uglify      : uglify_options,
+        cssmin      : cssmin_options,
+        githubPages : github_pages_options
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -121,6 +137,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-github-pages');
 
-    grunt.registerTask('default', ['watch']);
+    grunt.registerTask('default', tasks_in_order);
+    grunt.registerTask('github', ['githubPages:target']);
 };
