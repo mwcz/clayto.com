@@ -23,7 +23,7 @@ $NAVBAR_HEIGHT: 2em;
 html, body { height: 100%; overflow: hidden; }
 
 body {
-    font-family: "BitstreamVera";
+    font-family: "Roboto";
     background-color: #1f1f1f;
     color: #9f9f9f;
     @include transition( background-color $BG_FADE_DURATION ease-out );

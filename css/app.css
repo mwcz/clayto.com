@@ -1,8 +1,10 @@
 /* app css stylesheet */
 @import url(normalize.css);
 @font-face {
-  font-family: "BitstreamVera";
-  src: url("../fonts/ttf-bitstream-vera-1.10/Vera.ttf"); }
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Roboto"), url(//brick.a.ssl.fastly.net/roboto/400.woff) format("woff"); }
 /* line 23 */
 html, body {
   height: 100%;
@@ -10,7 +12,7 @@ html, body {
 
 /* line 25 */
 body {
-  font-family: "BitstreamVera";
+  font-family: "Roboto";
   background-color: #1f1f1f;
   color: #9f9f9f;
   -webkit-transition: background-color 0.3s ease-out;
