@@ -35,9 +35,10 @@ nav {
     z-index: 10000;
     top: 0;
     left: 0;
-    width: 100%;
+    width: calc(100% - 1em);
     line-height: 200%;
     padding-left: 0.5em;
+    padding-right: 0.5em;
     height: $NAVBAR_HEIGHT;
     background-color: $DEFAULT_BG_COLOR;
     border-color: $DEFAULT_BORDER_COLOR;
