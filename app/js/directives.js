@@ -31,6 +31,7 @@
     function handle_keypress (keycode_or_name) {
         var keycode = key(keycode_or_name);
         return function (scope, element, attrs) {
+            scope.type = 'key';
             element.bind("keydown keypress", function (event) {
                 if(event.which === keycode) {
                     scope.$apply(function (){
