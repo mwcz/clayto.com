@@ -26,6 +26,7 @@ body {
     font-family: "Roboto";
     background-color: #1f1f1f;
     color: #9f9f9f;
+    font-size: 100%;
     @include transition( background-color $BG_FADE_DURATION ease-out );
     @include user-select(none);
 }
@@ -44,6 +45,7 @@ nav {
     border-color: $DEFAULT_BORDER_COLOR;
     border-width: 0 0 1px 0;
     border-style: solid;
+    font-size: 1.2rem;
 
     button {
         padding: 0;
