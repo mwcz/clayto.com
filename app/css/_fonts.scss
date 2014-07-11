@@ -1,6 +1,11 @@
-@font-face {
+@font-face{
     font-family: 'Roboto';
+    font-weight: normal;
     font-style: normal;
-    font-weight: 400;
-    src: local('Roboto'),url(//brick.a.ssl.fastly.net/roboto/400.woff) format('woff');
+    src: url('../fonts/roboto/Roboto-Light-webfont.eot');
+    src: local('Roboto'),
+         url('../fonts/roboto/Roboto-Light-webfont.eot?iefix') format('eot'),
+         url('../fonts/roboto/Roboto-Light-webfont.woff') format('woff'),
+         url('../fonts/roboto/Roboto-Light-webfont.ttf') format('truetype'),
+         url('../fonts/roboto/Roboto-Light-webfont.svg#webfont') format('svg');
 }
